@@ -1,0 +1,94 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+
+import photo from '../assets/me.jpg';
+---
+
+<Layout title="Welcome to Astro.">
+	<main>
+		<Nav />
+
+		<Image
+			alt="It me"
+			height="56"
+			class="avatar"
+			src={photo}
+			width="56"
+		/>
+		<!-- <div class="avatar"></div> -->
+		<div class="home-content">
+			<h1>Hello, I am Caleb.</h1>
+			<h2>I am a front-end developer located in Dallas, TX, USA.</h2>
+
+			<p>I am currently working for Capital One Auto Finance as a senior lead engineer where I am responsible for design systems.</p>
+
+			<p>I also work on various <a href="/projects">open source projects</a> on the side to help make other developer's lives easier (and mine, too).</p>
+		</div>
+	</main>
+</Layout>
+
+<style>
+	main {
+		display: flex;
+		flex-flow: column;
+		font-family: var(--font-sans);
+		gap: var(--size-8);
+		margin: auto;
+		/* padding: 5rem; */
+		max-width: calc(100% - var(--size-fluid-7));
+		font-size: 20px;
+		line-height: 1.6;
+	}
+	.avatar {
+		aspect-ratio: 1;
+		background-image: url(/assets/me.jpg);
+		border-radius: 100%;
+	}
+	.home-content {
+		display: flex;
+		flex-flow: column;
+		gap: 24px;
+	}
+	h1 {
+		/* color:  */
+		font-family: var(--font-sans);
+		font-size: var(--font-size-fluid-3);
+		font-weight: var(--font-weight-7);
+	}
+	h2 {
+		font-size: var(--font-size-fluid-1);
+	}
+	.text-gradient {
+		background-image: var(--accent-gradient);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-size: 400%;
+		background-position: 0%;
+	}
+	.instructions {
+		margin-bottom: 2rem;
+		border: 1px solid rgba(var(--accent-light), 25%);
+		background: linear-gradient(rgba(var(--accent-dark), 66%), rgba(var(--accent-dark), 33%));
+		padding: 1.5rem;
+		border-radius: 8px;
+	}
+	.instructions code {
+		font-size: 0.8em;
+		font-weight: bold;
+		background: rgba(var(--accent-light), 12%);
+		color: rgb(var(--accent-light));
+		border-radius: 4px;
+		padding: 0.3em 0.4em;
+	}
+	.instructions strong {
+		color: rgb(var(--accent-light));
+	}
+	.link-card-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
+		gap: 2rem;
+		padding: 0;
+	}
+</style>
