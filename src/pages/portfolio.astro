@@ -91,7 +91,10 @@ const articles = [
                 <li><a href="#writing">Articles I've written</a></li>
             </ul>
 
-            <section id="open-source">
+            <section id="open-source" class="project-group">
+                <h2>Open source projects</h2>
+
+                <p>A collection of projects I wrote and currently maintain. This work touches thousands of developers and projects each week.</p>
                 <ul class="projects">
                     {openSourceProjects.map(project => <Card
                         title={project.title}
@@ -101,7 +104,13 @@ const articles = [
                 </ul>
             </section>
 
-            <section id="writing">
+            <hr>
+
+            <section id="writing" class="project-group">
+                <h2>Published articles</h2>
+
+                <p>A collection of articles written and published, mostly for <a href="https://css-tricks.com">CSS-Tricks</a>.</p>
+                
                 <ul class="projects">
                     {articles.map(article => <Card
                         title={article.title}
@@ -115,20 +124,35 @@ const articles = [
 </Layout>
 
 <style>
-h1 {
-    font-family: var(--font-sans);
-    font-size: var(--font-size-fluid-3);
-    font-weight: var(--font-weight-2);
-}
-.projects {
-    display: flex;
-    flex-flow: column;
-    gap: 16px;
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-.projects li {
-    max-inline-size: unset;
-}
+    h1 {
+        font-family: var(--font-sans);
+        font-size: var(--font-size-fluid-3);
+        font-weight: var(--font-weight-2);
+    }
+    h2 {
+        font-size: var(--font-size-fluid-1);
+        font-weight: var(--font-weight-4);
+    }
+    article {
+        display: flex;
+        flex-flow: column;
+        gap: 16px;
+    }
+    .project-group {
+        display: flex;
+        flex-flow: column;
+        gap: 12px;
+    }
+    .projects {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+    .projects li {
+        border-radius: 8px;
+        max-inline-size: unset;
+    }
 </style>
