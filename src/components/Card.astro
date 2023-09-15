@@ -32,6 +32,7 @@ const { href, title, body } = Astro.props;
 	}
 	.link-card h3 {
 		font-size: var(--font-size-fluid-1);
+		font-weight: 
 	}
 	.link-card p {
 		font-size: var(--font-size-1);
@@ -46,6 +47,7 @@ const { href, title, body } = Astro.props;
 	}
 	.link-card:has(:focus),
 	.link-card:has(:hover) {
+		background: black;
 		border-image-source: var(--gradient-24);
 
 		& h3 {
@@ -54,6 +56,7 @@ const { href, title, body } = Astro.props;
 			-webkit-text-fill-color: transparent;
 		}
 		& a {
+			color: var(--gray-2);
 			opacity: 100%;
 		}
 	}
