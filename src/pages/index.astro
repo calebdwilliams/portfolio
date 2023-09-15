@@ -1,31 +1,45 @@
 ---
-import { Image } from 'astro:assets';
+import { getImage, Image } from 'astro:assets';
+
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 
 import photo from '../assets/me.jpg';
+
+const optimizedBackground = await getImage({ src: photo, format: 'avif' });
 ---
 
 <Layout title="Welcome to Astro.">
 	<main>
-		<Nav />
+		<article class="home-content">
+			<div
+				class="avatar"
+				style={ `background-image: url("${optimizedBackground.src}")` }
+			></div>
 
-		<Image
-			alt="It me"
-			height="56"
-			class="avatar"
-			src={photo}
-			width="56"
-		/>
-		<!-- <div class="avatar"></div> -->
-		<div class="home-content">
 			<h1>Hello, I am Caleb.</h1>
 			<h2>I am a front-end developer located in Dallas, TX, USA.</h2>
 
-			<p>I am currently working for Capital One Auto Finance as a senior lead engineer where I am responsible for design systems.</p>
+			<div class="quick-bio">
+				<p>I am currently working for Capital One Auto Finance as a senior lead engineer where I am responsible for design systems.</p>
 
-			<p>I also work on various <a href="/projects">open source projects</a> on the side to help make other developer's lives easier (and mine, too).</p>
-		</div>
+				<p>I also work on various <a href="/projects">open source projects</a> on the side to help make other developer's lives easier (and mine, too).</p>
+
+				<p>When I'm not writing code, I enjoy writing, playing guitar and spending time with my family.</p>
+			</div>
+		</article>
+
+		<!-- <hr/>
+
+		<section>
+			<h2>Get in touch</h2>
+			<p>Intersted to know how I can help on your next project? Reach on on <a href="https://www.linkedin.com/in/calebdavidwilliams">LinkedIn</a> or fill out the form below.</p>
+
+			<form>
+				<label for="given-name">Your name</label>
+				<input name="given-name" id="given-name" required>
+			</form>
+		</section> -->
 	</main>
 </Layout>
 
@@ -33,18 +47,20 @@ import photo from '../assets/me.jpg';
 	main {
 		display: flex;
 		flex-flow: column;
-		font-family: var(--font-sans);
-		gap: var(--size-8);
-		margin: auto;
-		/* padding: 5rem; */
-		max-width: calc(100% - var(--size-fluid-7));
-		font-size: 20px;
-		line-height: 1.6;
+		gap: var(--size-7	);
 	}
 	.avatar {
 		aspect-ratio: 1;
-		background-image: url(/assets/me.jpg);
+		background-position: 60% 30%;
+		background-size: 230px;
 		border-radius: 100%;
+		transform: rotate(-10deg);
+		transition: all 0.2s var(--ease-in-2);
+		width: 140px;
+	}
+	.avatar:hover {
+		box-shadow: var(--shadow-3);
+		transform: rotate(5deg) scale(110%);
 	}
 	.home-content {
 		display: flex;
@@ -52,16 +68,26 @@ import photo from '../assets/me.jpg';
 		gap: 24px;
 	}
 	h1 {
-		/* color:  */
 		font-family: var(--font-sans);
 		font-size: var(--font-size-fluid-3);
-		font-weight: var(--font-weight-7);
+		font-weight: var(--font-weight-2);
 	}
 	h2 {
+		color: var(--text-2);
 		font-size: var(--font-size-fluid-1);
+		font-weight: var(--font-weight-4);
+	}
+	p {
+		font-size: var(--font-size-1);
+		font-weight: var(--font-weight-4)
+	}
+	.quick-bio {
+		display: flex;
+		flex-flow: column;
+		gap: 16px;
 	}
 	.text-gradient {
-		background-image: var(--accent-gradient);
+		background-image: var(--gradient-1);
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
 		background-size: 400%;
