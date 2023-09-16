@@ -101,11 +101,13 @@ const { description, title } = Astro.props;
 	body {
     background: var(--background);
     background-attachment: fixed;
+		background-repeat: no-repeat;
 		background-size: cover;
 		font-family: system-ui, sans-serif;
-		background-repeat: no-repeat;
-    	/* filter: var(--noise-filter-2); */
 	}
+  hr {
+    background-color: var(--brand);
+  }
 	.wrapper {
 		display: flex;
 		flex-flow: column;
