@@ -21,10 +21,9 @@ const { href, title, body } = Astro.props;
 </li>
 <style>
 	.link-card {
-		border: 12px solid;
 		border-image-source: var(--gradient-18);
 		border-image-slice: 1;
-		border-width: 6px;
+		border-width: var(--border-size-4);
 		box-sizing: border-box;
 		max-inline-size: unset;
 		orphans: 3;
@@ -32,10 +31,10 @@ const { href, title, body } = Astro.props;
 	}
 	.link-card h3 {
 		font-size: var(--font-size-fluid-1);
-		font-weight: 
+		font-weight: var(--font-weight-3);
 	}
 	.link-card p {
-		font-size: var(--font-size-1);
+		font-size: var(--font-size-fluid-0);
 	}
 	.link-card a {
 		display: block;

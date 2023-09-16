@@ -33,10 +33,12 @@ const { title } = Astro.props;
 <style is:global>
 	@import "open-props/style";
 	@import "open-props/normalize";
-	
+
 	:root {
 		/* light */
-		--brand-light: var(--blue-9);
+    --background-light: var(--gradient-9), var(--noise-1);
+		--brand-light: var(--blue-6);
+    --brand-light-hover: var(--blue-8);
 		--text-1-light: var(--gray-8);
 		--text-2-light: var(--gray-7);
 		--surface-1-light: var(--gray-0);
@@ -47,7 +49,9 @@ const { title } = Astro.props;
 		--shadow-strength-light: 2%;
 
 		/* dark */
-		--brand-dark: var(--orange-3);
+    --background-dark: var(--gradient-23), var(--noise-1);
+		--brand-dark: var(--blue-3);
+    --brand-dark-hover: var(--blue-1);
 		--text-1-dark: var(--gray-3);
 		--text-2-dark: var(--gray-5);
 		--surface-1-dark: var(--gray-12);
@@ -62,7 +66,9 @@ const { title } = Astro.props;
 		color-scheme: light;
 
 		/* set defaults */
+    --background: var(--background-light);
 		--brand: var(--brand-light);
+    --brand-hover: var(--brand-light-hover);
 		--text-1: var(--text-1-light);
 		--text-2: var(--text-2-light);
 		--surface-1: var(--surface-1-light);
@@ -77,7 +83,9 @@ const { title } = Astro.props;
 		:root {
 			color-scheme: dark;
 
+      --background: var(--background-dark);
 			--brand: var(--brand-dark);
+      --brand-hover: var(--brand-dark-hover);
 			--text-1: var(--text-1-dark);
 			--text-2: var(--text-2-dark);
 			--surface-1: var(--surface-1-dark);
@@ -90,12 +98,11 @@ const { title } = Astro.props;
 	}
 
 	body {
-		font-family: system-ui, sans-serif;
-		/* background: var(--surface-1); */
-		background: var(--gradient-9), var(--noise-1);
-		/* background: var(--gradient-22), var(--noise-1); */
-		background-repeat: no-repeat;
+    background: var(--background);
+    background-attachment: fixed;
 		background-size: cover;
+		font-family: system-ui, sans-serif;
+		background-repeat: no-repeat;
     	/* filter: var(--noise-filter-2); */
 	}
 	.wrapper {
@@ -104,7 +111,6 @@ const { title } = Astro.props;
 		font-family: var(--font-sans);
 		gap: var(--size-8);
 		margin: auto;
-		/* padding: 5rem; */
 		max-width: clamp(20rem, 76vw, 90rem);
 		font-size: 20px;
 		line-height: 1.6;
@@ -124,11 +130,15 @@ const { title } = Astro.props;
 		/* display: grid;
 		grid-template-columns: 1fr 88px; */
 		margin: 0 auto;
-		
+
 	}
 	footer {
 		font-size: var(--font-size-0);
 		padding: var(--size-2);
-		text-align: right;
+	}
+	@media (max-width: 350px) {
+		html {
+			padding: var(--size-2);
+		}
 	}
 </style>

@@ -1,6 +1,7 @@
 ---
 import { getImage, Image } from 'astro:assets';
 
+import InlineLink from '../components/InlineLink.astro';
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 
@@ -20,25 +21,41 @@ const optimizedBackground = await getImage({ src: photo, format: 'avif' });
 			<h2>I am a front-end developer located in Dallas, TX, USA.</h2>
 
 			<div class="quick-bio">
-				<p>I am currently working for Capital One Auto Finance as a senior lead engineer where I am responsible for design systems.</p>
+				<p>I am currently working for Capital One Auto Finance as a senior lead engineer where I am responsible for our <InlineLink href="/portfolio#work">internal design system</InlineLink>.</p>
 
-				<p>I also work on various <a href="/projects">open source projects</a> on the side to help make other developer's lives easier (and mine, too).</p>
+				<p>I also work on various <InlineLink href="/portfolio#open-source">open source projects</InlineLink> on the side to help make other developer's lives easier (and mine, too).</p>
 
 				<p>When I'm not writing code, I enjoy writing, playing guitar and spending time with my family.</p>
 			</div>
 		</article>
-		
-		<!-- <hr/>
 
-		<section>
+		<hr/>
+
+		<section id="contact" class="contact">
 			<h2>Get in touch</h2>
-			<p>Intersted to know how I can help on your next project? Reach on on <a href="https://www.linkedin.com/in/calebdavidwilliams">LinkedIn</a> or fill out the form below.</p>
+			<p>Intersted to know how I can help on your next project? Reach on on <InlineLink href="https://www.linkedin.com/in/calebdavidwilliams">LinkedIn</InlineLink> or fill out the form below.</p>
 
-			<form>
-				<label for="given-name">Your name</label>
-				<input name="given-name" id="given-name" required>
+			<form name="contact-caleb" method="POST" data-netlify="true">
+				<div>
+					<label for="name">Your name</label>
+					<input type="text" name="name" id="name" required>
+				</div>
+
+				<div>
+					<label for="email">Email address</label>
+					<input type="email" name="email" id="email" required>
+				</div>
+
+				<div>
+					<label for="query">Comment</label>
+					<textarea name="query" id="query"></textarea>
+				</div>
+
+				<div>
+					<button type="submit">Continue</button>
+				</div>
 			</form>
-		</section> -->
+		</section>
 	</main>
 </Layout>
 
@@ -77,13 +94,34 @@ const optimizedBackground = await getImage({ src: photo, format: 'avif' });
 		font-weight: var(--font-weight-4);
 	}
 	p {
-		font-size: var(--font-size-1);
+		font-size: var(--font-size-fluid-0);
 		font-weight: var(--font-weight-4)
 	}
+	.contact,
 	.quick-bio {
 		display: flex;
 		flex-flow: column;
 		gap: 16px;
+	}
+	form, form > div {
+		display: flex;
+		flex-flow: column;
+	}
+	form {
+		max-width: var(--size-15);
+		gap: 16px;
+	}
+	form > div {
+		gap: 4px;
+	}
+	label {
+		font-size: var(--font-size-fluid-0);
+		font-weight: var(--font-weight-6);
+	}
+	form button {
+		background: var(--gradient-7);
+		border-radius: var(--radius-2);
+		color: var(--gray-0);
 	}
 	.text-gradient {
 		background-image: var(--gradient-1);

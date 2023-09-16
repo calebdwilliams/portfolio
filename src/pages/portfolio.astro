@@ -1,158 +1,126 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Nav from '../components/Nav.astro';
 import Card from '../components/Card.astro';
+import InlineLink from '../components/InlineLink.astro';
+import Nav from '../components/Nav.astro';
 
-const openSourceProjects = [
-    {
-        title: '@open-wc/form-control',
-        body: 'A mixin for creating universal form controls',
-        href: 'https://www.npmjs.com/package/@open-wc/form-control'
-    },
-    {
-        title: '@open-wc/form-helpers',
-        body: 'Helper utilities for working with forms across multiple frameworks',
-        href: 'https://www.npmjs.com/package/@open-wc/form-helpers'
-    },
-    {
-        title: 'element-internals-polyfill',
-        body: 'A browser polyfill for the ElementInternals and AriaMixin specifications',
-        href: 'https://www.npmjs.com/package/element-internals-polyfill'
-    },
-    {
-        title: 'construct-style-sheets-polyfill',
-        body: 'A browser polyfill for the constructible stylesheets specification',
-        href: 'https://www.npmjs.com/package/construct-style-sheets-polyfill'
-    }
-];
-
-const articles = [
-    {
-        title: 'Creating Custom Form Controls with ElementInternals',
-        body: 'Ever since the dawn of time, humanity has dreamed of having more control over form elements. OK, I might be overselling it a tiny bit, but creating or …',
-        href: 'https://css-tricks.com/creating-custom-form-controls-with-elementinternals/'
-    },
-    {
-        title: '3 Approaches to Integrate React with Custom Elements',
-        body: 'In my role as a web developer who sits at the intersection of design and code, I am drawn to Web Components because of their portability. It makes sense: custom elements are …',
-        href: 'https://css-tricks.com/3-approaches-to-integrate-react-with-custom-elements/'
-    },
-    {
-        title: 'TypeScript, Minus TypeScript',
-        body: 'Unless you’ve been hiding under a rock the last several years (and let’s face it, hiding under a rock sometimes feels like the right thing to do), you’ve probably heard of and likely used TypeScript. TypeScript is …',
-        href: 'https://css-tricks.com/typescript-minus-typescript/'
-    },
-    {
-        title: 'How to Tame Line Height in CSS',
-        body: 'In CSS, line-height is probably one of the most misunderstood, yet commonly-used attributes. As designers and developers, when we think about line-height, we might think about the concept of leading from print design …',
-        href: 'https://css-tricks.com/how-to-tame-line-height-in-css/'
-    },
-    {
-        title: 'Advanced Tooling for Web Components',
-        body: 'Over the course of the last four articles in this five-part series, we’ve taken a broad look at the technologies that make up the Web Components standards. First, we looked at …',
-        href: 'https://css-tricks.com/advanced-tooling-for-web-components/'
-    },
-    {
-        title: 'Encapsulating Style and Structure with Shadow DOM',
-        body: 'This is part four of a five-part series discussing the Web Components specifications. In part one, we took a 10,000-foot view of the specifications and …',
-        href: 'https://css-tricks.com/encapsulating-style-and-structure-with-shadow-dom/'
-    },
-    {
-        title: 'Creating a Custom Element from Scratch',
-        body: 'In the last article, we got our hands dirty with Web Components by creating an HTML template that is in the document but not rendered until we need it. Next up, we’re going to continue our quest to …',
-        href: 'https://css-tricks.com/creating-a-custom-element-from-scratch/'
-    },
-    {
-        title: 'Crafting Reusable HTML Templates',
-        body: 'In our last article, we discussed the Web Components specifications (custom elements, shadow DOM, and HTML templates) at a high-level. In this article, and the three to follow, we will …',
-        href: 'https://css-tricks.com/crafting-reusable-html-templates/'
-    },
-    {
-        title: 'An Introduction to Web Components',
-        body: 'Front-end development moves at a break-neck pace. This is made evident by the myriad articles, tutorials, and Twitter threads bemoaning the state of what once was a fairly simple tech stack. In this article …',
-        href: 'https://css-tricks.com/an-introduction-to-web-components/'
-    }
-]
+import { articles, openSourceProjects, workProjects } from '../assets/data.js';
 ---
 
 <Layout title="Portfolio">
-    <main>
-        <article>
-            <h1>Portfolio</h1>
+  <main>
+    <article>
+      <h1>Portfolio</h1>
 
-            <p>As an employee at Capital One a great deal of my work from the past several years is spread across a variety of pages both internal and external.</p>
+      <p>As an employee at Capital One a great deal of my work from the past several years is spread across a variety of pages both internal and external.</p>
 
-            <p>Unfortunately due to security concerns much of my work cannot be open sourced or shared; however, here I've compiled a selection of work I've done outside of Capital One that I believe are representative of my work.</p>
+      <p>Unfortunately due to security concerns much of my work cannot be open sourced or shared; however, here I've compiled a selection of work I've done outside of Capital One that I believe are representative of my work.</p>
 
-            <p>This page is broken up into two sections:</p>
+      <p>This page is broken up into two sections:</p>
 
-            <ul>
-                <li><a href="#open-source">Open source projects</a></li>
-                <li><a href="#writing">Articles I've written</a></li>
-            </ul>
+      <ul>
+        <li><InlineLink href="#work">Examples in the wild</InlineLink></li>
+        <li><InlineLink href="#open-source">Open source projects</InlineLink></li>
+        <li><InlineLink href="#writing">Articles I've written</InlineLink></li>
+      </ul>
 
-            <section id="open-source" class="project-group">
-                <h2>Open source projects</h2>
+      <section id="work" class="project-group">
+        <h2>Examples in the wild</h2>
 
-                <p>A collection of projects I wrote and currently maintain. This work touches thousands of developers and projects each week.</p>
-                <ul class="projects">
-                    {openSourceProjects.map(project => <Card
-                        title={project.title}
-                        body={project.body}
-                        href={project.href}
-                    />)}
-                </ul>
-            </section>
+        <p>As a senior-lead front-end developer at Capital One, my primary responsibility is to lead the developement efforts on the FS Design System.</p>
 
-            <hr>
+        <p>The FS Design System is design and developed entirely in-house to meet the highest performance and accessibility standards and create a common language for designers, developers and product partners.</p>
 
-            <section id="writing" class="project-group">
-                <h2>Published articles</h2>
+        <p>In addition to developing and evangelizing the design system, I am also responsible for helping implementers apply the system in their applications, working in frameworks as varied as React, Solid, Angular and Lit.</p>
 
-                <p>A collection of articles written and published, mostly for <a href="https://css-tricks.com">CSS-Tricks</a>.</p>
-                
-                <ul class="projects">
-                    {articles.map(article => <Card
-                        title={article.title}
-                        body={article.body}
-                        href={article.href}
-                    />)}
-                </ul>
-            </section>
-        </article>
-    </main>
+        <p>Although the system is inner-sourced only, here are a few external-facing examples of the design system in action.</p>
+
+
+        <ul class="projects projects--work">
+          {workProjects.map(project => <Card
+            title={project.title}
+            body={project.body}
+            href={project.href}
+          />)}
+        </ul>
+      </section>
+
+      <hr>
+
+      <section id="open-source" class="project-group">
+          <h2>Open source projects</h2>
+
+          <p>A collection of projects I wrote and currently maintain. This work touches thousands of developers and projects each week.</p>
+          <ul class="projects">
+            {openSourceProjects.map(project => <Card
+              title={project.title}
+              body={project.body}
+              href={project.href}
+            />)}
+          </ul>
+      </section>
+
+      <hr>
+
+      <section id="writing" class="project-group">
+        <h2>Published articles</h2>
+
+        <p>A collection of articles written and published, mostly for <a href="https://css-tricks.com">CSS-Tricks</a>.</p>
+
+        <ul class="projects">
+          {articles.map(article => <Card
+              title={article.title}
+              body={article.body}
+              href={article.href}
+          />)}
+        </ul>
+      </section>
+    </article>
+  </main>
 </Layout>
 
 <style>
-    h1 {
-        font-family: var(--font-sans);
-        font-size: var(--font-size-fluid-3);
-        font-weight: var(--font-weight-2);
-    }
-    h2 {
-        font-size: var(--font-size-fluid-1);
-        font-weight: var(--font-weight-4);
-    }
-    article {
-        display: flex;
-        flex-flow: column;
-        gap: 16px;
-    }
-    .project-group {
-        display: flex;
-        flex-flow: column;
-        gap: 12px;
-    }
+  h1 {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-fluid-3);
+    font-weight: var(--font-weight-2);
+  }
+  h2 {
+    font-size: var(--font-size-fluid-1);
+    font-weight: var(--font-weight-4);
+  }
+  p {
+    font-size: var(--font-size-fluid-0);
+  }
+  article {
+    display: flex;
+    flex-flow: column;
+    gap: 16px;
+  }
+  .project-group {
+    container: projects / inline-size;
+    display: flex;
+    flex-flow: column;
+    gap: 12px;
+  }
+  .projects {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  .projects--work {
+    grid-template-columns: 1fr;
+  }
+  .projects li {
+    border-radius: 8px;
+    max-inline-size: unset;
+  }
+  @container projects (max-width: 400px) {
     .projects {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 16px;
-        list-style-type: none;
-        padding: 0;
-        margin: 0;
+      grid-template-columns: 1fr;
     }
-    .projects li {
-        border-radius: 8px;
-        max-inline-size: unset;
-    }
+  }
 </style>
