@@ -1,24 +1,14 @@
 ---
-import { getImage, Image } from 'astro:assets';
-
+import Avatar from '../components/Avatar.astro';
 import InlineLink from '../components/InlineLink.astro';
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
-
-import photo from '../assets/me.optimized.avif';
-
-const optimizedBackground = await getImage({ src: photo, format: 'avif' });
 ---
 
 <Layout title="Welcome to Astro.">
 	<main>
 		<article class="home-content">
-			<div
-        aria-description="A photo of Caleb Williams looking out of frame to his right, the viewer's left."
-				class="avatar"
-        role="image"
-				style={ `background-image: url("${optimizedBackground.src}")` }
-			></div>
+			<Avatar />
 			<h1>Hello, I am Caleb.</h1>
 			<h2>I am a front-end developer located in Dallas, TX, USA.</h2>
 
@@ -67,34 +57,6 @@ const optimizedBackground = await getImage({ src: photo, format: 'avif' });
 		flex-flow: column;
 		gap: var(--size-7);
 	}
-	.avatar {
-		aspect-ratio: 1;
-		background-position: 60% 30%;
-		background-size: 190px;
-		border-radius: 100%;
-    overflow: hidden;
-    position: relative;
-		transform: rotate(-10deg);
-		transition: all 0.2s var(--ease-in-2);
-		width: 140px;
-	}
-  .avatar::before {
-    background: var(--gradient-24);
-    border-radius: 100%;
-    content: "";
-    transition: all 0.2s var(--ease-in-2);
-    mix-blend-mode: color;
-    position: absolute;
-      inset: 0;
-    opacity: 0;
-  }
-	.avatar:hover {
-		box-shadow: var(--shadow-2);
-		transform: rotate(5deg) scale(110%);
-	}
-  .avatar:hover::before {
-    opacity: 1;
-  }
 	.home-content {
 		display: flex;
 		flex-flow: column;
