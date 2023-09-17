@@ -23,7 +23,7 @@ const { href, title, body } = Astro.props;
 	.link-card {
 		border-image-source: var(--gradient-18);
 		border-image-slice: 1;
-		border-width: var(--border-size-4);
+		border-width: var(--border-size-3);
 		box-sizing: border-box;
 		max-inline-size: unset;
 		orphans: 3;
@@ -46,7 +46,7 @@ const { href, title, body } = Astro.props;
 	}
 	.link-card:has(:focus),
 	.link-card:has(:hover) {
-		background: black;
+		background: var(--sand-12);
 		border-image-source: var(--gradient-24);
 
 		& h3 {

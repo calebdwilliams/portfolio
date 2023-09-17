@@ -33,21 +33,33 @@ import Nav from '../components/Nav.astro';
 			<form name="contact-caleb" method="POST" netlify>
 				<div>
 					<label for="name">Your name</label>
-					<input type="text" name="name" id="name" required>
+					<input
+            autocomplete="name"
+            id="name"
+            name="name"
+            required
+            type="text"
+          >
 				</div>
 
 				<div>
 					<label for="email">Email address</label>
-					<input type="email" name="email" id="email" required>
+					<input
+            autocomplete="email"
+            id="email"
+            name="email"
+            required
+            type="email"
+          >
 				</div>
 
 				<div>
-					<label for="query">Comment</label>
+					<label for="query">How can I help?</label>
 					<textarea name="query" id="query"></textarea>
 				</div>
 
 				<div>
-					<button type="submit">Continue</button>
+					<button type="submit">Let's chat</button>
 				</div>
 			</form>
 		</section>
