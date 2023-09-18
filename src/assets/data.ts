@@ -83,7 +83,7 @@ export const workProjects: Project[] = [
   },
   {
     title: 'Auto Prequalify',
-    body: 'The Capital One Auto prequality page was written from the groupd up to utilize the FS Design System. This lead to a reduction in accessibility findings and better developer ergonomics.',
+    body: 'The Capital One Auto prequality page was written from the ground up to utilize the FS Design System. This led to a reduction in accessibility findings and better developer ergonomics.',
     href: 'https://www.capitalone.com/cars/prequalify'
   }
 ];

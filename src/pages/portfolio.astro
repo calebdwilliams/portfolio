@@ -30,14 +30,13 @@ import { articles, openSourceProjects, workProjects } from '../assets/data.js';
       <section id="work" class="project-group">
         <h2>Examples in the wild</h2>
 
-        <p>As a senior-lead front-end developer at Capital One, my primary responsibility is to lead the developement efforts on the FS Design System.</p>
+        <p>As a senior lead front-end engineer at Capital One, my primary responsibility is to lead the development efforts on the FS Design System.</p>
 
-        <p>The FS Design System is design and developed entirely in-house to meet the highest performance and accessibility standards and create a common language for designers, developers and product partners.</p>
+        <p>The FS Design System is designed and developed entirely in-house to meet the highest performance and accessibility standards and create a common language for designers, developers and product partners.</p>
 
         <p>In addition to developing and evangelizing the design system, I am also responsible for helping implementers apply the system in their applications, working in frameworks as varied as React, Solid, Angular and Lit.</p>
 
         <p>Although the system is inner-sourced only, here are a few external-facing examples of the design system in action.</p>
-
 
         <ul class="projects projects--work">
           {workProjects.map(project => <Card
@@ -54,6 +53,7 @@ import { articles, openSourceProjects, workProjects } from '../assets/data.js';
           <h2>Open source projects</h2>
 
           <p>A collection of projects I wrote and currently maintain. This work touches thousands of developers and projects each week.</p>
+
           <ul class="projects">
             {openSourceProjects.map(project => <Card
               title={project.title}
@@ -127,3 +127,28 @@ import { articles, openSourceProjects, workProjects } from '../assets/data.js';
     }
   }
 </style>
+
+<script>
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const options = {
+      root: null,
+      rootMargin: '16px',
+      threshold: .4
+    };
+
+    const callback = (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('link-card--visible');
+        }
+      })
+    }
+
+    const observer = new IntersectionObserver(callback, options);
+
+    const linkCards = document.querySelectorAll('.link-card');
+    linkCards.forEach(linkCard => {
+      observer.observe(linkCard);
+    });
+  }
+</script>
