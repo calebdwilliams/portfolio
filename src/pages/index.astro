@@ -31,7 +31,7 @@ import Nav from '../components/Nav.astro';
 			<p>Interested to know how I can help on your next project? Reach out on <InlineLink href="https://www.linkedin.com/in/calebdavidwilliams">LinkedIn</InlineLink> or fill out the form below.</p>
 
 			<form name="contact-caleb" method="POST" netlify>
-				<div>
+				<div class="field">
 					<label for="name">Your name</label>
 					<input
             autocomplete="name"
@@ -42,7 +42,7 @@ import Nav from '../components/Nav.astro';
           >
 				</div>
 
-				<div>
+				<div class="field">
 					<label for="email">Email address</label>
 					<input
             autocomplete="email"
@@ -53,12 +53,12 @@ import Nav from '../components/Nav.astro';
           >
 				</div>
 
-				<div>
+				<div class="field">
 					<label for="query">How can I help?</label>
 					<textarea name="query" id="query"></textarea>
 				</div>
 
-				<div>
+				<div class="controls">
 					<button type="submit">Let's chat</button>
 				</div>
 			</form>
@@ -97,7 +97,7 @@ import Nav from '../components/Nav.astro';
 		flex-flow: column;
 		gap: 16px;
 	}
-	form, form > div {
+	form, form > .field {
 		display: flex;
 		flex-flow: column;
 	}
@@ -108,6 +108,10 @@ import Nav from '../components/Nav.astro';
 	form > div {
 		gap: 4px;
 	}
+  form > .controls {
+    display: flex;
+    justify-content: flex-end;
+  }
 	label {
 		font-size: var(--font-size-fluid-0);
 		font-weight: var(--font-weight-6);
@@ -116,6 +120,9 @@ import Nav from '../components/Nav.astro';
 		background: var(--brand);
 		border-radius: var(--radius-2);
 		color: var(--surface-1);
+    font-size: var(--font-size-1);
+    line-height: 1.5;
+    padding: var(--size-2) var(--size-4);
 	}
   form button:hover {
     background: var(--brand-hover);
