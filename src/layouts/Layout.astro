@@ -20,16 +20,19 @@ const { description, title } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 		<ViewTransitions />
-    <!-- Google tag (gtag.js) -->
-	</head>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-C3B70LQ4W2"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+    {import.meta.env.MODE === 'development' ? <></> : <>
+      <!-- Google tag (gtag.js) -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-C3B70LQ4W2"></script>
+      <script type="application/javascript">
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
-    gtag('config', 'G-C3B70LQ4W2');
-  </script>
+        gtag('config', 'G-C3B70LQ4W2');
+      </script>
+    </>}
+	</head>
+
 	<body>
 		<div class="wrapper">
 			<Nav />
