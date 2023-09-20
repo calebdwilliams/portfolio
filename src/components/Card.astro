@@ -47,13 +47,12 @@ const { href, title, body } = Astro.props;
 		font-size: var(--font-size-fluid-0);
 	}
 	.link-card a {
+    color: var(--text-1);
 		display: block;
 		opacity: 80%;
 		padding: var(--size-2);
 	}
-	.link-card a:visited {
-		color: var(--text-2);
-	}
+
 	.link-card:has(:focus),
 	.link-card:has(:hover) {
 		background: var(--sand-12);
@@ -69,4 +68,16 @@ const { href, title, body } = Astro.props;
 			opacity: 100%;
 		}
 	}
+  @media (prefers-contrast: more) {
+    .link-card a {
+      color: var(--gray-13);
+    }
+    .link-card:has(:focus) h3,
+    .link-card:has(:hover) h3 {
+      background: unset;
+      color: var(--gray-2);
+      -webkit-background-clip: unset;
+      -webkit-text-fill-color: unset;
+    }
+  }
 </style>

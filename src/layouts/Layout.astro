@@ -110,6 +110,15 @@ const { description, title } = Astro.props;
 		}
 	}
 
+  @media (prefers-contrast: more) and (prefers-color-scheme: light) {
+    :root {
+      --background: var(--white);
+    }
+    a {
+      text-decoration-color: var(--white);
+    }
+  }
+
 	body {
     background: var(--background);
     background-attachment: fixed;
