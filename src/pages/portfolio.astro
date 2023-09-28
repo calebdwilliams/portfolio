@@ -136,7 +136,7 @@ import { articles, openSourceProjects, workProjects } from '../assets/data.js';
       threshold: .25
     };
 
-    const callback = (entries) => {
+    const callback = (entries: IntersectionObserverEntry[]) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('link-card--visible');

@@ -57,16 +57,18 @@ const { href, title, body } = Astro.props;
 	.link-card:has(:hover) {
 		background: var(--sand-12);
 		border-image-source: var(--gradient-24);
+  }
 
-		& h3 {
-			background: var(--gradient-24);
-			-webkit-background-clip: text;
-			-webkit-text-fill-color: transparent;
-		}
-		& a {
-			color: var(--gray-2);
-			opacity: 100%;
-		}
+	.link-card:has(:focus) h3,
+	.link-card:has(:hover) h3 {
+    background: var(--gradient-24);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .link-card:has(:focus) a,
+  .link-card:has(:hover) a {
+    color: var(--gray-2);
+    opacity: 100%;
 	}
   @media (prefers-contrast: more) {
     .link-card a {
