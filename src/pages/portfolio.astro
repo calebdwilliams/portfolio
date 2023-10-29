@@ -141,7 +141,7 @@ import { articles, openSourceProjects, workProjects } from '../assets/data.js';
         if (entry.isIntersecting) {
           entry.target.classList.add('link-card--visible');
         }
-      })
+      });
     }
 
     const observer = new IntersectionObserver(callback, options);
