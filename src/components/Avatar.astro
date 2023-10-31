@@ -1,13 +1,19 @@
 ---
+interface Props {
+  alignSelf: 'start' | 'center' | 'end';
+}
+
 import { getImage } from 'astro:assets';
 import photo from '../assets/avatar.jpg';
 
 const optimizedBackground = await getImage({ src: photo, format: 'avif' });
+
+const { alignSelf } = Astro.props;
 ---
 
 <div
   aria-label="A photo of Caleb Williams looking out of frame to his right, the viewer's left."
-  class="avatar"
+  class:list={[ 'avatar', alignSelf ]}
   role="img"
   style={ `background-image: url("${optimizedBackground.src}")` }
 ></div>
@@ -39,5 +45,11 @@ const optimizedBackground = await getImage({ src: photo, format: 'avif' });
 	}
   .avatar:hover::before {
     opacity: 1;
+  }
+  .center {
+    align-self: center;
+  }
+  .end {
+    align-self: flex-end;
   }
 </style>

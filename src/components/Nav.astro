@@ -22,7 +22,16 @@
 </nav>
 <style>
   .main-nav {
+    grid-area: nav;
     margin-top: var(--size-8);
+  }
+
+  .main-nav.pinned {
+    background: black;
+  }
+
+  .main-nav.pinned ul {
+    padding-top: 16px;
   }
 
   .main-nav ul {
@@ -41,3 +50,17 @@
     text-decoration: underline;
   }
 </style>
+<script>
+  const el = document.querySelector(".main-nav")!;
+  const observerCallback = (([entry]: IntersectionObserverEntry[]) => {
+    console.log(entry);
+    entry.target.classList.toggle('pinned', entry.intersectionRatio < 1)
+  });
+  const observer = new IntersectionObserver(observerCallback, { threshold: 1 });
+  // const observer = new IntersectionObserver(
+  //   ([e]) => e.target.classList.toggle("is-pinned", e.intersectionRatio < 1),
+  //   { threshold: [1] }
+  // );
+
+  // observer.observe(el);
+</script>

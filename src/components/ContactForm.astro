@@ -1,0 +1,68 @@
+---
+import InlineLink from "./InlineLink.astro";
+---
+
+<form name="contact-caleb" method="POST" data-netlify>
+  <div class="field">
+    <label for="name">Your name</label>
+    <input
+      autocomplete="name"
+      id="name"
+      name="name"
+      required
+      type="text"
+    >
+  </div>
+
+  <div class="field">
+    <label for="email">Email address</label>
+    <input
+      autocomplete="email"
+      id="email"
+      name="email"
+      required
+      type="email"
+    >
+  </div>
+
+  <div class="field">
+    <label for="query">How can I help?</label>
+    <textarea name="query" id="query"></textarea>
+  </div>
+
+  <div class="controls">
+    <button type="submit">Let's chat</button>
+  </div>
+</form>
+<style>
+	form, form > .field {
+		display: flex;
+		flex-flow: column;
+	}
+	form {
+		max-width: var(--size-15);
+		gap: 16px;
+	}
+	form > div {
+		gap: 4px;
+	}
+  form > .controls {
+    display: flex;
+    justify-content: flex-end;
+  }
+	label {
+		font-size: var(--font-size-fluid-0);
+		font-weight: var(--font-weight-6);
+	}
+	form button {
+		background: var(--brand);
+		border-radius: var(--radius-2);
+		color: var(--surface-1);
+    font-size: var(--font-size-1);
+    line-height: 1.5;
+    padding: var(--size-2) var(--size-4);
+	}
+  form button:hover {
+    background: var(--brand-hover);
+  }
+</style>

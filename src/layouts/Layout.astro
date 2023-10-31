@@ -35,11 +35,11 @@ const { description, title } = Astro.props;
 
 	<body>
 		<div class="wrapper">
-			<Nav />
+			<!-- <Nav /> -->
 			<slot />
-			<footer>
+			<!-- <footer>
 				© {new Date().getFullYear()} Caleb Williams
-			</footer>
+			</footer> -->
 		</div>
 	</body>
 </html>
@@ -60,6 +60,8 @@ const { description, title } = Astro.props;
 		--surface-4-light: var(--gray-3);
 		--surface-shadow-light: var(--gray-8-hsl);
 		--shadow-strength-light: 2%;
+    --background-opacity-light: 0.3;
+    --border-opacity-light: 0.7;
 
 		/* dark */
     --background-dark: var(--gradient-8), var(--noise-1);
@@ -73,6 +75,8 @@ const { description, title } = Astro.props;
 		--surface-4-dark: var(--gray-9);
 		--surface-shadow-dark: var(--gray-12-hsl);
 		--shadow-strength-dark: 80%;
+    --background-opacity-dark: 0.05;
+    --border-opacity-dark: 0.2;
 	}
 
 	:root {
@@ -90,6 +94,8 @@ const { description, title } = Astro.props;
 		--surface-4: var(--surface-4-light);
 		--surface-shadow: var(--surface-shadow-light);
 		--shadow-strength: var(--shadow-strength-light);
+    --background-opacity: var(--background-opacity-light);
+    --border-opacity: var(--border-opacity-light);
 	}
 
 	@media (prefers-color-scheme: dark) {
@@ -107,6 +113,8 @@ const { description, title } = Astro.props;
 			--surface-4: var(--surface-4-dark);
 			--surface-shadow: var(--surface-shadow-dark);
 			--shadow-strength: var(--shadow-strength-dark);
+      --background-opacity: var(--background-opacity-dark);
+      --border-opacity: var(--border-opacity-dark);
 		}
 	}
 
@@ -125,6 +133,7 @@ const { description, title } = Astro.props;
 		background-repeat: no-repeat;
 		background-size: cover;
 		font-family: system-ui, sans-serif;
+    overscroll-behavior: none;
 	}
   hr {
     background-color: var(--gray-5);
@@ -134,7 +143,7 @@ const { description, title } = Astro.props;
 		display: flex;
 		flex-flow: column;
 		font-family: var(--font-sans);
-		gap: var(--size-8);
+		gap: var(--size-4);
 		margin: auto;
 		max-width: clamp(20rem, 76vw, 90rem);
 		font-size: 20px;

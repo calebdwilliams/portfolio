@@ -1,7 +1,11 @@
 ---
 import Avatar from '../components/Avatar.astro';
+import ContactForm from '../components/ContactForm.astro';
 import InlineLink from '../components/InlineLink.astro';
+import Nav from '../components/Nav.astro';
 import Layout from '../layouts/Layout.astro';
+import { resumeExperience } from '../assets/experience';
+import Experience from '../components/Experience.astro';
 ---
 
 <Layout
@@ -9,152 +13,118 @@ import Layout from '../layouts/Layout.astro';
   description="Hello, I'm Caleb. I'm a front-end developer located in Dallas, TX, USA."
 >
 	<main>
-		<article class="home-content">
-			<Avatar />
-			<h1>Hello, I am Caleb.</h1>
-			<h2>I am a front-end developer located in Dallas, TX, USA.</h2>
+    <header>
+      <Avatar alignSelf='start'/>
+      <h1>Caleb Williams</h1>
+      <h2>Senior Lead Front-End Engineer at Capital One</h2>
+    </header>
 
-			<div class="quick-bio">
-				<p>I am currently working for Capital One Auto Finance as a senior lead engineer where I am responsible for our <InlineLink href="/portfolio#work">internal design system</InlineLink>.</p>
+    <Nav />
+    <article class="content">
 
-				<p>I also work on various <InlineLink href="/portfolio#open-source">open source projects</InlineLink> on the side to help make other developer's lives easier (and mine, too).</p>
+      <section class="content-section">
+        <p>With over ten years of experience as a front-end developer and designer (the last six at Capital One), I am passionate about creating user-friendly, accessible, performant web experiences that meet business needs and delight customers. I specialize in web platform technologies, such as TypeScript, CSS, HTML, Web Components and modern frameworks and I lead the strategy, architecture and development of a design system that supports more than 250 projects across the enterprise.</p>
 
-				<p>When I'm not writing code, I enjoy writing, playing guitar and spending time with my family.</p>
-			</div>
-		</article>
+        <p>As an trusted accessibility partner for Capital One Design, I also advocate for customers of all ability levels and coach other developers on best practices and standards for web development. I enjoy sharing my knowledge and expertise through articles, talks and mentoring and I aim to build up and lead others in advancing the web and our products. I am always eager to learn new skills, explore new challenges and collaborate with cross-functional teams to deliver high-quality user experiences.</p>
+      </section>
 
-		<hr/>
+      <section class="content-section">
+        <h3>Experience</h3>
 
-		<section id="contact" class="contact">
-			<h2>Get in touch</h2>
-			<p>Interested to know how I can help on your next project? Reach out on <InlineLink href="https://www.linkedin.com/in/calebdavidwilliams">LinkedIn</InlineLink> or fill out the form below.</p>
+        <ul class="experience">
+          {resumeExperience.map(experience => <Experience
+            company={experience.company}
+            endDate={experience.endDate}
+            shortDescription={experience.shortDescription}
+            startDate={experience.startDate}
+            title={experience.title}
+            href={experience.href}
+          />)}
+        </ul>
+      </section>
 
-			<form name="contact-caleb" method="POST" netlify>
-				<div class="field">
-					<label for="name">Your name</label>
-					<input
-            autocomplete="name"
-            id="name"
-            name="name"
-            required
-            type="text"
-          >
-				</div>
+      <section id="contact" class="contact">
+        <h2>Get in touch</h2>
+        <p>Interested to know how I can help on your next project? Reach out on <InlineLink href="https://www.linkedin.com/in/calebdavidwilliams">LinkedIn</InlineLink> or fill out the form below.</p>
+        <ContactForm/>
+      </section>
 
-				<div class="field">
-					<label for="email">Email address</label>
-					<input
-            autocomplete="email"
-            id="email"
-            name="email"
-            required
-            type="email"
-          >
-				</div>
-
-				<div class="field">
-					<label for="query">How can I help?</label>
-					<textarea name="query" id="query"></textarea>
-				</div>
-
-				<div class="controls">
-					<button type="submit">Let's chat</button>
-				</div>
-			</form>
-		</section>
+      <footer>
+				© {new Date().getFullYear()} Caleb D. Williams
+			</footer>
+    </article>
 	</main>
 </Layout>
 
 <style>
-	main {
-		display: flex;
-		flex-flow: column;
-		gap: var(--size-7);
-	}
-	.home-content {
-		display: flex;
-		flex-flow: column;
-		gap: 24px;
-	}
-	h1 {
+  main {
+    display: grid;
+    grid-template: "header nav" "header content";
+    gap: var(--size-8);
+  }
+  main header {
+    display: flex;
+    flex-flow: column;
+    gap: var(--size-4);
+    grid-area: header;
+    justify-content: center;
+    position: sticky;
+      top: 0;
+    max-height: 100dvh;
+  }
+  h1 {
 		font-family: var(--font-sans);
 		font-size: var(--font-size-fluid-3);
-		font-weight: var(--font-weight-2);
+		font-weight: var(--font-weight-6);
 	}
 	h2 {
 		color: var(--text-2);
 		font-size: var(--font-size-fluid-1);
-		font-weight: var(--font-weight-4);
+		font-weight: var(--font-weight-3);
 	}
-	p {
-		font-size: var(--font-size-fluid-0);
-		font-weight: var(--font-weight-4)
+  h3 {
+		color: var(--text-2);
+		font-size: var(--font-size-fluid-1);
+		font-weight: var(--font-weight-3);
 	}
-	.contact,
+  .content {
+    display: flex;
+    flex-flow: column;
+    gap: var(--size-12);
+    grid-area: content;
+    padding-block-start: var(--size-10);
+  }
+  .content-section {
+    display: flex;
+    flex-flow: column;
+    gap: var(--size-4);
+  }
+  .content-section p {
+    font-size: var(--font-size-fluid-0);
+  }
+  .experience {
+    padding: 0;
+  }
+  .contact,
 	.quick-bio {
 		display: flex;
 		flex-flow: column;
 		gap: 16px;
 	}
-	form, form > .field {
-		display: flex;
-		flex-flow: column;
-	}
-	form {
-		max-width: var(--size-15);
-		gap: 16px;
-	}
-	form > div {
-		gap: 4px;
-	}
-  form > .controls {
-    display: flex;
-    justify-content: flex-end;
+  footer {
+    text-align: right;
   }
-	label {
-		font-size: var(--font-size-fluid-0);
-		font-weight: var(--font-weight-6);
-	}
-	form button {
-		background: var(--brand);
-		border-radius: var(--radius-2);
-		color: var(--surface-1);
-    font-size: var(--font-size-1);
-    line-height: 1.5;
-    padding: var(--size-2) var(--size-4);
-	}
-  form button:hover {
-    background: var(--brand-hover);
+  @media (max-width: 1000px) {
+    main {
+      display: grid;
+      gap: var(--size-10);
+      grid-template: "nav" "header" "content";
+    }
+    main header {
+      position: static;
+    }
+    .content {
+      padding: 0;
+    }
   }
-	.text-gradient {
-		background-image: var(--gradient-1);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-size: 400%;
-		background-position: 0%;
-	}
-	.instructions {
-		margin-bottom: 2rem;
-		border: 1px solid rgba(var(--accent-light), 25%);
-		background: linear-gradient(rgba(var(--accent-dark), 66%), rgba(var(--accent-dark), 33%));
-		padding: 1.5rem;
-		border-radius: 8px;
-	}
-	.instructions code {
-		font-size: 0.8em;
-		font-weight: bold;
-		background: rgba(var(--accent-light), 12%);
-		color: rgb(var(--accent-light));
-		border-radius: 4px;
-		padding: 0.3em 0.4em;
-	}
-	.instructions strong {
-		color: rgb(var(--accent-light));
-	}
-	.link-card-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
-		gap: 2rem;
-		padding: 0;
-	}
 </style>

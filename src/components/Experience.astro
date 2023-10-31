@@ -1,0 +1,64 @@
+---
+interface Props {
+	title: string;
+	company: string;
+  endDate: string;
+	shortDescription: string;
+  startDate: string;
+  href: string;
+}
+
+const { company, endDate, shortDescription, startDate, title, href } = Astro.props;
+---
+
+<li class="experience">
+  <a href={href} target="_blank" rel="noopener noreferrer">
+    <h3 class="experience__title">{title} • {company}</h3>
+    <span class="experience__time">{startDate} - {endDate}</span>
+    <p class="experience__description">{shortDescription}</p>
+  </a>
+</li>
+
+<style>
+  .experience {
+    --background: ;
+    border-radius: var(--radius-2);
+    border-color: transparent;
+    border-image-source: var(--gradient-18);
+		border-image-slice: 1;
+		border-width: var(--border-size-1);
+		box-sizing: border-box;
+    display: grid;
+    gap: var(--size-3);
+    grid-template: "date title title"
+                   "date description description";
+    padding: var(--size-3);
+  }
+  .experience a {
+    all: unset;
+    cursor: pointer;
+  }
+  .experience:hover {
+    background: rgba(255, 255, 255, var(--background-opacity));
+    border-color: rgba(255, 255, 255, var(--border-opacity));
+  }
+  .experience__title {
+    grid-area: title;
+
+  }
+  .experience__time {
+    font-size: var(--font-size-0);
+    grid-area: date;
+    text-transform: uppercase;
+  }
+  .experience__description {
+    grid-area: description;
+  }
+  .experience h3 {
+    font-size: var(--font-size-1);
+    font-weight: var(--font-weight-6);
+  }
+  .experience p {
+    font-size: var(--font-size-1);
+  }
+</style>
