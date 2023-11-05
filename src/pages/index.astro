@@ -6,6 +6,7 @@ import Nav from '../components/Nav.astro';
 import Layout from '../layouts/Layout.astro';
 import { resumeExperience } from '../assets/experience';
 import Experience from '../components/Experience.astro';
+import Footer from '../components/Footer.astro';
 ---
 
 <Layout
@@ -49,9 +50,7 @@ import Experience from '../components/Experience.astro';
         <ContactForm/>
       </section>
 
-      <footer>
-				© {new Date().getFullYear()} Caleb D. Williams
-			</footer>
+      <Footer/>
     </article>
 	</main>
 </Layout>
@@ -111,9 +110,6 @@ import Experience from '../components/Experience.astro';
 		flex-flow: column;
 		gap: 16px;
 	}
-  footer {
-    text-align: right;
-  }
   @media (max-width: 1000px) {
     main {
       display: grid;
