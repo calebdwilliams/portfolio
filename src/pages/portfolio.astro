@@ -13,6 +13,8 @@ import { articles, openSourceProjects, workProjects } from '../assets/data.js';
   title="Caleb D. Williams | Portfolio"
 >
   <main>
+    <Nav />
+
     <header>
       <h1>Portfolio</h1>
       <p>As an employee at Capital One a great deal of my work from the past several years is spread across a variety of pages both internal and external.</p>
@@ -25,8 +27,6 @@ import { articles, openSourceProjects, workProjects } from '../assets/data.js';
         </ul>
       </nav>
     </header>
-
-    <Nav/>
 
     <article id="portfolio" class="portfolio">
       <section id="work" class="project-group">
@@ -142,6 +142,7 @@ import { articles, openSourceProjects, workProjects } from '../assets/data.js';
     display: block;
     height: 1px;
   } */
+  a.portfolio-section:focus,
   a.portfolio-section:hover {
     text-decoration: underline;
     opacity: 1;
