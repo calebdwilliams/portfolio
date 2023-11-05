@@ -12,33 +12,25 @@ import { articles, openSourceProjects, workProjects } from '../assets/data.js';
   description="A collection of work by front-end developer Caleb Williams"
   title="Caleb D. Williams | Portfolio"
 >
-  <Nav/>
   <main>
-    <article>
+    <header>
       <h1>Portfolio</h1>
-
       <p>As an employee at Capital One a great deal of my work from the past several years is spread across a variety of pages both internal and external.</p>
 
-      <p>Unfortunately much of my day-to-day work cannot be open sourced or shared; however, here I've compiled a selection of examples I've done outside of Capital One that I believe are representative of my work.</p>
+      <nav class="portfolio-nav">
+        <ul>
+          <li><a class="portfolio-section" href="#work">Examples in the wild</a></li>
+          <li><a class="portfolio-section" href="#open-source">Open source projects</a></li>
+          <li><a class="portfolio-section" href="#writing">Published articles</a></li>
+        </ul>
+      </nav>
+    </header>
 
-      <p>This page is broken up into three sections:</p>
-
-      <ul>
-        <li><InlineLink href="#work">Examples in the wild</InlineLink></li>
-        <li><InlineLink href="#open-source">Open source projects</InlineLink></li>
-        <li><InlineLink href="#writing">Articles I've written</InlineLink></li>
-      </ul>
+    <article id="portfolio">
+      <Nav/>
 
       <section id="work" class="project-group">
         <h2>Examples in the wild</h2>
-
-        <p>As a senior lead front-end engineer at Capital One, my primary responsibility is to lead the development efforts on the FS Design System.</p>
-
-        <p>The FS Design System is designed and developed entirely in-house to meet the highest performance and accessibility standards and create a common language for designers, developers and product partners.</p>
-
-        <p>In addition to developing and evangelizing the design system, I am also responsible for helping implementers apply the system in their applications, working in frameworks as varied as React, Solid, Angular and Lit.</p>
-
-        <p>Although the system is inner-sourced only, here are a few external-facing examples of the design system in action.</p>
 
         <ul class="projects projects--work">
           {workProjects.map(project => <Card
@@ -80,12 +72,29 @@ import { articles, openSourceProjects, workProjects } from '../assets/data.js';
           />)}
         </ul>
       </section>
+
+      <Footer/>
     </article>
   </main>
-  <Footer/>
 </Layout>
 
 <style>
+  main {
+    display: grid;
+    grid-template: "header nav" "header content";
+    grid-template-columns: 1fr 1.61fr;
+    gap: var(--size-8);
+  }
+  main header {
+    display: flex;
+    flex-flow: column;
+    gap: var(--size-4);
+    grid-area: header;
+    justify-content: center;
+    position: sticky;
+      top: 0;
+    max-height: 100dvh;
+  }
   h1 {
     font-family: var(--font-sans);
     font-size: var(--font-size-fluid-3);
@@ -93,7 +102,8 @@ import { articles, openSourceProjects, workProjects } from '../assets/data.js';
   }
   h2 {
     font-size: var(--font-size-fluid-1);
-    font-weight: var(--font-weight-4);
+    font-weight: var(--font-weight-2);
+    padding-block-end: var(--size-2);
   }
   p {
     font-size: var(--font-size-fluid-0);
@@ -103,6 +113,39 @@ import { articles, openSourceProjects, workProjects } from '../assets/data.js';
     flex-flow: column;
     gap: 16px;
   }
+  .portfolio-nav ul {
+    display: flex;
+    flex-flow: column;
+    gap: var(--size-2);
+    list-style-type: none;
+    padding-inline-start: 0;
+  }
+  .portfolio-nav ul li {
+    display: flex;
+    padding-inline-start: 0;
+  }
+  a.portfolio-section {
+    align-items: center;
+    color: var(--text-2);
+    font-size: var(--font-size-0);
+    font-weight: var(--font-weight-6);
+    opacity: .75;
+    text-transform: uppercase;
+    transition: all 0.2s var(--ease-in-2);;
+  }
+  /* a.portfolio-section::after {
+    border-top: 1px solid white;
+    content: "";
+    display: block;
+    height: 1px;
+  } */
+  a.portfolio-section:hover {
+    text-decoration: underline;
+    opacity: 1;
+  }
+  a.portfolio-section--active {
+    opacity: 1;
+  }
   .project-group {
     container: projects / inline-size;
     display: flex;
@@ -111,7 +154,7 @@ import { articles, openSourceProjects, workProjects } from '../assets/data.js';
   }
   .projects {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 16px;
     list-style-type: none;
     padding: 0;
@@ -132,10 +175,11 @@ import { articles, openSourceProjects, workProjects } from '../assets/data.js';
 </style>
 
 <script>
+  window.addEventListener('load', console.log)
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     const options = {
       root: null,
-      rootMargin: '16px',
+      rootMargin: '-1px',
       threshold: .25
     };
 
@@ -154,4 +198,27 @@ import { articles, openSourceProjects, workProjects } from '../assets/data.js';
       observer.observe(linkCard);
     });
   }
+
+  const sectionObserverOptions: IntersectionObserverInit = {
+    root: document,
+    rootMargin: '16px 0px 0px',
+    threshold: .25
+  };
+
+  const sectionObserverCallback: IntersectionObserverCallback = (entries: IntersectionObserverEntry[]): void => {
+    const activeClass = 'portfolio-section--active';
+    const next = entries.find(e => e.isIntersecting)
+    if (next?.target.id) {
+      const previouslyActiveAnchor = document.querySelector(`.${activeClass}`);
+      const newAnchor = document.querySelector(`a[href="#${next.target.id}"]`);
+
+      previouslyActiveAnchor?.classList.toggle(activeClass, false);
+      newAnchor?.classList.toggle(activeClass, true);
+    }
+  };
+
+  const sectionObserver = new IntersectionObserver(sectionObserverCallback, sectionObserverOptions);
+  document.querySelectorAll('.project-group').forEach(node => {
+    sectionObserver.observe(node);
+  })
 </script>
