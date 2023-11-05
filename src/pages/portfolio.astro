@@ -26,9 +26,9 @@ import { articles, openSourceProjects, workProjects } from '../assets/data.js';
       </nav>
     </header>
 
-    <article id="portfolio">
-      <Nav/>
+    <Nav/>
 
+    <article id="portfolio" class="portfolio">
       <section id="work" class="project-group">
         <h2>Examples in the wild</h2>
 
@@ -95,6 +95,9 @@ import { articles, openSourceProjects, workProjects } from '../assets/data.js';
       top: 0;
     max-height: 100dvh;
   }
+  .portfolio {
+    grid-area: content;
+  }
   h1 {
     font-family: var(--font-sans);
     font-size: var(--font-size-fluid-3);
@@ -129,7 +132,7 @@ import { articles, openSourceProjects, workProjects } from '../assets/data.js';
     color: var(--text-2);
     font-size: var(--font-size-0);
     font-weight: var(--font-weight-6);
-    opacity: .75;
+    opacity: .5;
     text-transform: uppercase;
     transition: all 0.2s var(--ease-in-2);;
   }
@@ -172,11 +175,26 @@ import { articles, openSourceProjects, workProjects } from '../assets/data.js';
       grid-template-columns: 1fr;
     }
   }
+  @media (max-width: 1000px) {
+    main {
+      display: grid;
+      gap: var(--size-10);
+      grid-template: "nav" "header" "content";
+    }
+    main header {
+      position: static;
+    }
+    .content {
+      padding: 0;
+    }
+  }
 </style>
 
 <script>
-  window.addEventListener('load', console.log)
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('.link-card').forEach(card => {
+      card.classList.add('link-card--hidden');
+    });
     const options = {
       root: null,
       rootMargin: '-1px',
@@ -186,7 +204,9 @@ import { articles, openSourceProjects, workProjects } from '../assets/data.js';
     const callback = (entries: IntersectionObserverEntry[]) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('link-card--visible');
+          window.requestAnimationFrame(() => {
+            entry.target.classList.remove('link-card--hidden');
+          });
         }
       });
     }

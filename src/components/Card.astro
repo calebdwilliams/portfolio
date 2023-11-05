@@ -27,12 +27,16 @@ const { href, title, body } = Astro.props;
 		box-sizing: border-box;
 		max-inline-size: unset;
 		orphans: 3;
-		transition: all 0.4s var(--ease-in-2);
+    transition: all 0.4s var(--ease-in-2);
 	}
+  .link-card--hidden {
+    opacity: 0;
+    transform: translateY(40%);
+  }
   @media (prefers-reduced-motion: no-preference) {
-    .link-card {
-      opacity: 0;
-      transform: translateY(40%);
+    .link-card--hidden {
+      opacity: 1;
+      transform: translateY(0);
     }
   }
   .link-card--visible {
