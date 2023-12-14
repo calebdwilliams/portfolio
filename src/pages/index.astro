@@ -7,6 +7,7 @@ import Layout from '../layouts/Layout.astro';
 import { resumeExperience } from '../assets/experience';
 import Experience from '../components/Experience.astro';
 import Footer from '../components/Footer.astro';
+import GlowList from '../components/GlowList.astro';
 ---
 
 <Layout
@@ -19,7 +20,7 @@ import Footer from '../components/Footer.astro';
     <header>
       <Avatar alignSelf='start'/>
       <h1>Caleb Williams</h1>
-      <h2>Senior Lead Front-End Engineer at Capital One</h2>
+      <h2>Staff Front-End Engineer at Slack</h2>
     </header>
 
     <article class="content">
@@ -33,7 +34,7 @@ import Footer from '../components/Footer.astro';
       <section class="content-section">
         <h3>Experience</h3>
 
-        <ul class="experience">
+        <GlowList>
           {resumeExperience.map(experience => <Experience
             company={experience.company}
             endDate={experience.endDate}
@@ -42,7 +43,18 @@ import Footer from '../components/Footer.astro';
             title={experience.title}
             href={experience.href}
           />)}
-        </ul>
+        </GlowList>
+
+        <!-- <ul class="experience">
+          {resumeExperience.map(experience => <Experience
+            company={experience.company}
+            endDate={experience.endDate}
+            shortDescription={experience.shortDescription}
+            startDate={experience.startDate}
+            title={experience.title}
+            href={experience.href}
+          />)}
+        </ul> -->
       </section>
 
       <section id="contact" class="contact">

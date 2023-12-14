@@ -21,16 +21,11 @@ const { company, endDate, shortDescription, startDate, title, href } = Astro.pro
 
 <style>
   .experience {
-    border-radius: var(--radius-2);
+    background: rgba(255, 255, 255, var(--background-opacity));
     border-color: transparent;
-    border-image-source: var(--gradient-18);
-		border-image-slice: 1;
-		border-width: var(--border-size-1);
 		box-sizing: border-box;
     display: grid;
     gap: var(--size-3);
-    grid-template: "date title title"
-                   "date description description";
     padding: var(--size-3);
   }
   .experience a {
@@ -39,8 +34,8 @@ const { company, endDate, shortDescription, startDate, title, href } = Astro.pro
   }
   .experience:focus-within,
   .experience:hover {
-    background: rgba(255, 255, 255, var(--background-opacity));
-    border-color: rgba(255, 255, 255, var(--border-opacity));
+    /* background: rgba(255, 255, 255, var(--background-opacity)); */
+    box-shadow: 0 0 0 2px var(--white-0), 0 0 0 4px blue;
   }
   .experience__title {
     grid-area: title;

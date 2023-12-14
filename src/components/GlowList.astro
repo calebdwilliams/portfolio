@@ -1,0 +1,165 @@
+---
+import { resumeExperience } from "../assets/experience"
+
+---
+
+<ul class="container">
+  <slot/>
+</ul>
+
+<style is:global>
+  @property --start {
+    syntax: '<number>';
+    inherits: true;
+    initial-value: 0;
+  }
+
+  :root {
+    --bg: hsl(246 44% 7%);
+    --border: hsl(280 10% 50% / 1);
+    --card: hsl(237 36% 10%);
+    --color: hsl(240 18% 80%);
+    --border-width: 2px;
+    --border-radius: var(--radius-2);
+    /* --gradient: var(--gradient-24); */
+  }
+
+  .container {
+    --spread: 60;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    justify-content: center;
+    list-style-type: none;
+    padding: 0;
+    position: relative;
+    touch-action: none;
+  }
+
+  .container li {
+    --active: 0.15;
+	  --start: 0;
+    border-radius: var(--radius-2);
+    padding: 0;
+    position: relative;
+  }
+
+  .container li:is(:hover, :focus-visible) {
+    z-index: 2;
+  }
+
+  .glow {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    filter: blur(calc(var(--blur) * 1px));
+  }
+
+  .glow::after,
+  .glow::before {
+    --alpha: 0;
+    content: "";
+    background: var(--gradient);
+    background-attachment: fixed;
+    position: absolute;
+    inset: -5px;
+    border: 10px solid transparent;
+    border-radius: var(--border-radius);
+    mask:
+      linear-gradient(#0000, #0000),
+      conic-gradient(from calc((var(--start) - (var(--spread) * 0.5)) * 1deg), #000 0deg, #fff, #0000 calc(var(--spread) * 1deg));
+    mask-composite: intersect;
+    mask-clip: padding-box, border-box;
+    opacity: var(--active);
+    transition: opacity 1s;
+  }
+  .container li::before {
+    position: absolute;
+    inset: 0;
+    border: var(--border-width) solid transparent;
+    content: "";
+    border-radius: var(--border-radius);
+    pointer-events: none;
+    background: var(--border);
+    background-attachment: fixed;
+    border-radius: var(--border-radius);
+    mask:
+      linear-gradient(#0000, #0000),
+      conic-gradient(
+        from calc(((var(--start) + (var(--spread) * 0.25)) - (var(--spread) * 1.5)) * 1deg),
+        hsl(0 0% 100% / 0.15) 0deg,
+        white,
+        hsl(0 0% 100% / 0.15) calc(var(--spread) * 2.5deg));
+    mask-clip: padding-box, border-box;
+    mask-composite: intersect;
+    opacity: var(--active);
+    transition: opacity 1s;
+  }
+
+  .container li::after {
+    --bg-size: 100%;
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    background: var(--gradient);
+    background-attachment: fixed;
+    border-radius: var(--border-radius);
+    opacity: var(--active, 0);
+    transition: opacity 1s;
+    --alpha: 0;
+    inset: 0;
+    border: var(--border-width) solid transparent;
+    mask:
+      linear-gradient(#0000, #0000),
+      conic-gradient(from calc(((var(--start) + (var(--spread) * 0.25)) - (var(--spread) * 0.5)) * 1deg), #0000 0deg, #fff, #0000 calc(var(--spread) * 0.5deg));
+    filter: brightness(1.5);
+    mask-clip: padding-box, border-box;
+    mask-composite: intersect;
+  }
+</style>
+
+<script>
+  const cards = document.querySelectorAll<HTMLLIElement>('.container li');
+
+  const config = {
+    proximity: 40,
+    spread: 80,
+    blur: 20,
+    gap: 32,
+    vertical: false,
+    opacity: 0,
+  };
+
+  const update = (event: PointerEvent) => {
+    // get the angle based on the center point of the card and pointer position
+    for (const card of cards) {
+      // Check the card against the proximity and then start updating
+      const cardBounds = card.getBoundingClientRect();
+      // Get distance between pointer and outerbounds of card
+      if (
+        event?.x > cardBounds.left - config.proximity &&
+        event?.x < cardBounds.left + cardBounds.width + config.proximity &&
+        event?.y > cardBounds.top - config.proximity &&
+        event?.y < cardBounds.top + cardBounds.height + config.proximity) {
+        // If within proximity set the active opacity
+        card.style.setProperty('--active', '1');
+      } else {
+        card.style.setProperty('--active', config.opacity.toString());
+      }
+
+      const cardCenter = [
+        cardBounds.left + cardBounds.width * 0.5,
+        cardBounds.top + cardBounds.height * 0.5
+      ];
+
+      let angle = Math.atan2(event?.y - cardCenter[1], event?.x - cardCenter[0]) * 180 / Math.PI;
+
+      angle = angle < 0 ? angle + 360 : angle;
+      card.style.setProperty('--start', (angle + 90).toString());
+    }
+  }
+
+  document.body.addEventListener('pointermove', update);
+</script>

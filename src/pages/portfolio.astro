@@ -6,6 +6,7 @@ import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 
 import { articles, openSourceProjects, workProjects } from '../assets/data.js';
+import GlowList from '../components/GlowList.astro';
 ---
 
 <Layout
@@ -32,13 +33,13 @@ import { articles, openSourceProjects, workProjects } from '../assets/data.js';
       <section id="work" class="project-group">
         <h2>Examples in the wild</h2>
 
-        <ul class="projects projects--work">
+        <GlowList class="projects projects--work">
           {workProjects.map(project => <Card
             title={project.title}
             body={project.body}
             href={project.href}
           />)}
-        </ul>
+        </GlowList>
       </section>
 
       <hr>

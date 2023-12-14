@@ -23,6 +23,7 @@ const { href, title, body } = Astro.props;
 	.link-card {
 		border-image-source: var(--gradient-18);
 		border-image-slice: 1;
+    border-radius: var(--radius-2);
 		border-width: var(--border-size-1);
 		box-sizing: border-box;
 		max-inline-size: unset;
@@ -60,7 +61,6 @@ const { href, title, body } = Astro.props;
 	.link-card:has(:focus),
 	.link-card:has(:hover) {
 		background: var(--sand-12);
-		border-image-source: var(--gradient-24);
   }
 
 	.link-card:has(:focus) h3,
@@ -74,6 +74,13 @@ const { href, title, body } = Astro.props;
     color: var(--gray-2);
     opacity: 100%;
 	}
+  .glow {
+    mask-composite: intersect;
+    mask-clip: padding-box, border-box;
+    mask:
+      linear-gradient(#0000, #0000),
+      conic-gradient(#0000 0deg, #​fff, #0000 45deg);
+  }
   @media (prefers-contrast: more) {
     .link-card a {
       color: var(--gray-13);

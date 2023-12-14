@@ -10,9 +10,18 @@ interface Experience {
 
 export const resumeExperience: Experience[] = [
   {
+    company: 'Slack',
+    startDate: 'Jan. 2024',
+    endDate: 'Present',
+    title: 'Staff Software Engineer, Front-End',
+    shortDescription: 'Coming soon',
+    description: ['Coming soon'],
+    href: 'https://slack.com'
+  },
+  {
     company: 'Capital One',
     startDate: 'April 2016',
-    endDate: 'Present',
+    endDate: 'Dec. 2023',
     title: 'Senior Lead Front-End Developer',
     shortDescription: 'Lead front-end developer on Capital One\'s design system. In this role I work with cross-functional teams across the enterprise to deliver accessible, performant, pixel-perfect code to millions of customers.',
     description: [
