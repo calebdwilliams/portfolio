@@ -31,13 +31,13 @@ const { href, title, body } = Astro.props;
     transition: all 0.4s var(--ease-in-2);
 	}
   .link-card--hidden {
-    opacity: 0;
-    transform: translateY(40%);
+    opacity: 1;
+    transform: translateY(0);
   }
   @media (prefers-reduced-motion: no-preference) {
     .link-card--hidden {
-      opacity: 1;
-      transform: translateY(0);
+      opacity: 0;
+      transform: translateY(40%);
     }
   }
   .link-card--visible {
@@ -50,12 +50,13 @@ const { href, title, body } = Astro.props;
 	}
 	.link-card p {
 		font-size: var(--font-size-fluid-0);
+    text-wrap: balance;
 	}
 	.link-card a {
     color: var(--text-1);
 		display: block;
 		opacity: 80%;
-		padding: var(--size-2);
+		padding: var(--size-2) var(--size-3);
 	}
 
 	.link-card:has(:focus),

@@ -111,6 +111,7 @@ import GlowList from '../components/GlowList.astro';
   }
   p {
     font-size: var(--font-size-fluid-0);
+    text-wrap: balance;
   }
   article {
     display: flex;
@@ -193,54 +194,63 @@ import GlowList from '../components/GlowList.astro';
 </style>
 
 <script>
-  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    document.querySelectorAll('.link-card').forEach(card => {
-      card.classList.add('link-card--hidden');
-    });
-    const options = {
-      root: null,
-      rootMargin: '-1px',
-      threshold: .25
-    };
+  function initPage() {
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.querySelectorAll('.link-card').forEach(card => {
+        card.classList.add('link-card--hidden');
+      });
 
-    const callback = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          window.requestAnimationFrame(() => {
-            entry.target.classList.remove('link-card--hidden');
-          });
-        }
+      const options = {
+        root: null,
+        rootMargin: '-1px',
+        threshold: .25
+      };
+
+      const callback = (entries: IntersectionObserverEntry[]) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            window.requestAnimationFrame(() => {
+              entry.target.classList.remove('link-card--hidden');
+            });
+          }
+        });
+      }
+
+      const observer = new IntersectionObserver(callback, options);
+
+      const linkCards = document.querySelectorAll('.link-card');
+      linkCards.forEach(linkCard => {
+        observer.observe(linkCard);
       });
     }
 
-    const observer = new IntersectionObserver(callback, options);
+    const sectionObserverOptions: IntersectionObserverInit = {
+      root: document,
+      rootMargin: '16px 0px 0px',
+      threshold: .25
+    };
 
-    const linkCards = document.querySelectorAll('.link-card');
-    linkCards.forEach(linkCard => {
-      observer.observe(linkCard);
+    const sectionObserverCallback: IntersectionObserverCallback = (entries: IntersectionObserverEntry[]): void => {
+      const activeClass = 'portfolio-section--active';
+      const next = entries.find(e => e.isIntersecting)
+      if (next?.target.id) {
+        const previouslyActiveAnchor = document.querySelector(`.${activeClass}`);
+        const newAnchor = document.querySelector(`a[href="#${next.target.id}"]`);
+
+        previouslyActiveAnchor?.classList.toggle(activeClass, false);
+        newAnchor?.classList.toggle(activeClass, true);
+      }
+    };
+
+    const sectionObserver = new IntersectionObserver(sectionObserverCallback, sectionObserverOptions);
+    document.querySelectorAll('.project-group').forEach(node => {
+      sectionObserver.observe(node);
     });
   }
 
-  const sectionObserverOptions: IntersectionObserverInit = {
-    root: document,
-    rootMargin: '16px 0px 0px',
-    threshold: .25
-  };
+  initPage();
 
-  const sectionObserverCallback: IntersectionObserverCallback = (entries: IntersectionObserverEntry[]): void => {
-    const activeClass = 'portfolio-section--active';
-    const next = entries.find(e => e.isIntersecting)
-    if (next?.target.id) {
-      const previouslyActiveAnchor = document.querySelector(`.${activeClass}`);
-      const newAnchor = document.querySelector(`a[href="#${next.target.id}"]`);
-
-      previouslyActiveAnchor?.classList.toggle(activeClass, false);
-      newAnchor?.classList.toggle(activeClass, true);
-    }
-  };
-
-  const sectionObserver = new IntersectionObserver(sectionObserverCallback, sectionObserverOptions);
-  document.querySelectorAll('.project-group').forEach(node => {
-    sectionObserver.observe(node);
-  })
+  document.addEventListener('astro:after-swap', () => {
+    initPage();
+  });
 </script>

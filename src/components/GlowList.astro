@@ -121,45 +121,53 @@ import { resumeExperience } from "../assets/experience"
 </style>
 
 <script>
-  const cards = document.querySelectorAll<HTMLLIElement>('.container li');
+  function initGlowEffect() {
+    const cards = document.querySelectorAll<HTMLLIElement>('.container li');
 
-  const config = {
-    proximity: 40,
-    spread: 80,
-    blur: 20,
-    gap: 32,
-    vertical: false,
-    opacity: 0,
-  };
+    const config = {
+      proximity: 40,
+      spread: 80,
+      blur: 20,
+      gap: 32,
+      vertical: false,
+      opacity: 0,
+    };
 
-  const update = (event: PointerEvent) => {
-    // get the angle based on the center point of the card and pointer position
-    for (const card of cards) {
-      // Check the card against the proximity and then start updating
-      const cardBounds = card.getBoundingClientRect();
-      // Get distance between pointer and outerbounds of card
-      if (
-        event?.x > cardBounds.left - config.proximity &&
-        event?.x < cardBounds.left + cardBounds.width + config.proximity &&
-        event?.y > cardBounds.top - config.proximity &&
-        event?.y < cardBounds.top + cardBounds.height + config.proximity) {
-        // If within proximity set the active opacity
-        card.style.setProperty('--active', '1');
-      } else {
-        card.style.setProperty('--active', config.opacity.toString());
+    const update = (event: PointerEvent) => {
+      // get the angle based on the center point of the card and pointer position
+      for (const card of cards) {
+        // Check the card against the proximity and then start updating
+        const cardBounds = card.getBoundingClientRect();
+        // Get distance between pointer and outerbounds of card
+        if (
+          event?.x > cardBounds.left - config.proximity &&
+          event?.x < cardBounds.left + cardBounds.width + config.proximity &&
+          event?.y > cardBounds.top - config.proximity &&
+          event?.y < cardBounds.top + cardBounds.height + config.proximity) {
+          // If within proximity set the active opacity
+          card.style.setProperty('--active', '1');
+        } else {
+          card.style.setProperty('--active', config.opacity.toString());
+        }
+
+        const cardCenter = [
+          cardBounds.left + cardBounds.width * 0.5,
+          cardBounds.top + cardBounds.height * 0.5
+        ];
+
+        let angle = Math.atan2(event?.y - cardCenter[1], event?.x - cardCenter[0]) * 180 / Math.PI;
+
+        angle = angle < 0 ? angle + 360 : angle;
+        card.style.setProperty('--start', (angle + 90).toString());
       }
-
-      const cardCenter = [
-        cardBounds.left + cardBounds.width * 0.5,
-        cardBounds.top + cardBounds.height * 0.5
-      ];
-
-      let angle = Math.atan2(event?.y - cardCenter[1], event?.x - cardCenter[0]) * 180 / Math.PI;
-
-      angle = angle < 0 ? angle + 360 : angle;
-      card.style.setProperty('--start', (angle + 90).toString());
     }
+
+    document.body.addEventListener('pointermove', update);
   }
 
-  document.body.addEventListener('pointermove', update);
+  document.addEventListener('astro:after-swap', () => {
+    initGlowEffect();
+  });
+
+  initGlowEffect();
 </script>
