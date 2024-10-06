@@ -57,4 +57,12 @@ const { company, endDate, shortDescription, startDate, title, href } = Astro.pro
     font-size: var(--font-size-1);
     text-wrap: balance;
   }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .experience {
+      animation: reveal-on-scroll linear;
+      animation-timeline: view();
+      animation-range: cover cover 200px;
+    }
+  }
 </style>
