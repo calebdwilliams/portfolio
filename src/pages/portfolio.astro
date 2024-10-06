@@ -138,12 +138,6 @@ import GlowList from '../components/GlowList.astro';
     text-transform: uppercase;
     transition: all 0.2s var(--ease-in-2);;
   }
-  /* a.portfolio-section::after {
-    border-top: 1px solid white;
-    content: "";
-    display: block;
-    height: 1px;
-  } */
   a.portfolio-section:focus,
   a.portfolio-section:hover {
     text-decoration: underline;
@@ -194,8 +188,10 @@ import GlowList from '../components/GlowList.astro';
 </style>
 
 <script>
+  const supportsScrollAnimations = CSS.supports("animation-timeline", "scroll()");
+
   function initPage() {
-    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (!supportsScrollAnimations && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       document.querySelectorAll('.link-card').forEach(card => {
         card.classList.add('link-card--hidden');
       });

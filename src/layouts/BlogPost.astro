@@ -1,0 +1,180 @@
+---
+import { ViewTransitions } from 'astro:transitions';
+
+interface Props {
+  description: string;
+	title: string;
+}
+
+const { description, title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={description} />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<ViewTransitions />
+    {import.meta.env.MODE === 'development' ? <></> : <>
+      <!-- Google tag (gtag.js) -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-C3B70LQ4W2"></script>
+      <script type="application/javascript">
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-C3B70LQ4W2');
+      </script>
+    </>}
+	</head>
+
+	<body>
+		<div class="wrapper">
+			<!-- <Nav /> -->
+			<slot />
+			<!-- <footer>
+				© {new Date().getFullYear()} Caleb Williams
+			</footer> -->
+		</div>
+	</body>
+</html>
+<style is:global>
+	@import "open-props/style";
+	@import "open-props/normalize";
+
+	:root {
+		/* light */
+    --background-light: var(--gradient-9), var(--noise-1);
+		--brand-light: var(--blue-9);
+    --brand-light-hover: var(--blue-10);
+		--text-1-light: var(--gray-10);
+		--text-2-light: var(--gray-7);
+		--surface-1-light: var(--gray-0);
+		--surface-2-light: var(--gray-1);
+		--surface-3-light: var(--gray-2);
+		--surface-4-light: var(--gray-3);
+		--surface-shadow-light: var(--gray-8-hsl);
+		--shadow-strength-light: 2%;
+    --background-opacity-light: 0.3;
+    --border-opacity-light: 0.7;
+    --gradient-light: var(--gradient-4);
+
+		/* dark */
+    --background-dark: var(--gradient-8), var(--noise-1);
+		--brand-dark: var(--blue-3);
+    --brand-dark-hover: var(--blue-1);
+		--text-1-dark: var(--gray-1);
+		--text-2-dark: var(--gray-2);
+		--surface-1-dark: var(--gray-12);
+		--surface-2-dark: var(--gray-11);
+		--surface-3-dark: var(--gray-10);
+		--surface-4-dark: var(--gray-9);
+		--surface-shadow-dark: var(--gray-12-hsl);
+		--shadow-strength-dark: 80%;
+    --background-opacity-dark: 0.05;
+    --border-opacity-dark: 0.2;
+    --gradient-dark: var(--gradient-9); /* 5, 9, 23, 25*, 28*, 30*/
+	}
+
+	:root {
+		color-scheme: light;
+
+		/* set defaults */
+    --background: var(--background-light);
+    /* --background: linear-gradient( to top right in oklab, oklch(90% 0.4 180 / 15%), oklch(40% 0.8 200 / 20%)); */
+		--brand: var(--brand-light);
+    --brand-hover: var(--brand-light-hover);
+		--text-1: var(--text-1-light);
+		--text-2: var(--text-2-light);
+		--surface-1: var(--surface-1-light);
+		--surface-2: var(--surface-2-light);
+		--surface-3: var(--surface-3-light);
+		--surface-4: var(--surface-4-light);
+		--surface-shadow: var(--surface-shadow-light);
+		--shadow-strength: var(--shadow-strength-light);
+    --background-opacity: var(--background-opacity-light);
+    --border-opacity: var(--border-opacity-light);
+    --gradient: var(--gradient-light);
+	}
+
+	@media (prefers-color-scheme: dark) {
+		:root {
+			color-scheme: dark;
+
+      --background: var(--background-dark);
+			--brand: var(--brand-dark);
+      --brand-hover: var(--brand-dark-hover);
+			--text-1: var(--text-1-dark);
+			--text-2: var(--text-2-dark);
+			--surface-1: var(--surface-1-dark);
+			--surface-2: var(--surface-2-dark);
+			--surface-3: var(--surface-3-dark);
+			--surface-4: var(--surface-4-dark);
+			--surface-shadow: var(--surface-shadow-dark);
+			--shadow-strength: var(--shadow-strength-dark);
+      --background-opacity: var(--background-opacity-dark);
+      --border-opacity: var(--border-opacity-dark);
+      --gradient: var(--gradient-dark);
+		}
+	}
+
+  @media (prefers-contrast: more) and (prefers-color-scheme: light) {
+    :root {
+      --background: var(--white);
+    }
+    a {
+      text-decoration-color: var(--white);
+    }
+  }
+
+	body {
+    background: var(--background);
+    background-attachment: fixed;
+		background-repeat: no-repeat;
+		background-size: cover;
+		font-family: system-ui, sans-serif;
+    overscroll-behavior: none;
+	}
+  hr {
+    background-color: var(--gray-5);
+    height: var(--border-size-1);
+  }
+	.wrapper {
+		display: flex;
+		flex-flow: column;
+		font-family: var(--font-sans);
+		gap: var(--size-4);
+		margin: auto;
+		max-width: clamp(22rem, 76vw, 90rem);
+		font-size: 20px;
+		line-height: 1.6;
+	}
+	code {
+		font-family:
+			Menlo,
+			Monaco,
+			Lucida Console,
+			Liberation Mono,
+			DejaVu Sans Mono,
+			Bitstream Vera Sans Mono,
+			Courier New,
+			monospace;
+	}
+	body {
+		margin: 0 auto;
+
+	}
+	footer {
+		font-size: var(--font-size-0);
+		padding: var(--size-2);
+	}
+	@media (max-width: 350px) {
+		html {
+			padding: var(--size-2);
+		}
+	}
+</style>
